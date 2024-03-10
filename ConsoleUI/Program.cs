@@ -11,11 +11,15 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             ICarService carManager = new CarManager(new EfCarDal()) { };
-            
-            foreach(var car in carManager.GetCarDetails().Data) {
-                Console.WriteLine(car.BrandName+"-------- "+car.CarName+"----- "+car.ColorName);
+            UserManager userManager=new UserManager(new EfUserDal());
+
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            foreach(var user in userManager.GetAll().Data)
+            {
+                Console.WriteLine(user.FirstName);
             }
-            
+
+
 
         }
 
