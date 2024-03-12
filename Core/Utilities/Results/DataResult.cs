@@ -18,7 +18,5 @@ namespace Core.Utilities.Results
         }
         public T Data { get; }
 
-        public bool success { get; }
-        public string message { get; }
     }
 }
