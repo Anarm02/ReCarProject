@@ -11,10 +11,11 @@ using Autofac.Extras.DynamicProxy;
 using Castle.DynamicProxy;
 using DataAccess.EntityFramework;
 using Core.Utilities.Interceptors;
+using Core.Utilities.Helpers.FileHelper;
 
 namespace Business.DependencyResolver.Autofac
 {
-    public class AutofacBusinessModule:Module
+    public class AutofacBusinessModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -26,7 +27,9 @@ namespace Business.DependencyResolver.Autofac
             builder.RegisterType<EfRentalDal>().As<IRentalDal>().SingleInstance();
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
-
+            builder.RegisterType<CarImageManager>().As<ICarImageService>().SingleInstance();
+            builder.RegisterType<EfCarImagesDal>().As<ICarImagesDal>().SingleInstance();
+            builder.RegisterType<FileHelperManager>().As<IFileHelper>().SingleInstance();
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
