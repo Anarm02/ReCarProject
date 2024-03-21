@@ -64,6 +64,11 @@ namespace Business.Concrete
         }
         public IDataResult<List<CarImage>> GetImagesByCarId(int carId)
         {
+            IResult result = BusinessRules.Run(CheckCarImagesCount(carId));
+            if(result!=null)
+            {
+                return new ErrorDataResult<List<CarImage>>(GetDefaultImage(carId).Data);
+            }
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(c => c.CarId == carId)); 
         }
         private IDataResult<List<CarImage>> GetDefaultImage(int carId)
