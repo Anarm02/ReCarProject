@@ -7,16 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.EntityFramework
+namespace DataAccess.Concrete.EntityFramework
 {
     public class EfRentalDal : EfEntityRepositoryBase<Rental, RcdbContext>, IRentalDal
     {
         public void CarDeliver(int id)
         {
-            using (RcdbContext context=new RcdbContext())
+            using (RcdbContext context = new RcdbContext())
             {
-                var deliveredcar=context.Rentals.FirstOrDefault(car=>car.RentalId==id);
-                deliveredcar.RentDate=DateTime.Now;
+                var deliveredcar = context.Rentals.FirstOrDefault(car => car.RentalId == id);
+                deliveredcar.RentDate = DateTime.Now;
                 context.SaveChanges();
 
             }

@@ -1,11 +1,7 @@
 
 using Autofac.Extensions.DependencyInjection;
 using Autofac;
-using Business.Abstract;
-using Business.Concrete;
 using Business.DependencyResolver.Autofac;
-using DataAccess.Abstract;
-using DataAccess.EntityFramework;
 
 namespace WebAPI
 {

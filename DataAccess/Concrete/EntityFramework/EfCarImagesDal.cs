@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.EntityFramework
+namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfUserDal:EfEntityRepositoryBase<User,RcdbContext>,IUserDal
+    public class EfCarImagesDal : EfEntityRepositoryBase<CarImage, RcdbContext>, ICarImagesDal
     {
     }
 }

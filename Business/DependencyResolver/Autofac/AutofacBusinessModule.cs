@@ -9,9 +9,9 @@ using Business.Abstract;
 using DataAccess.Abstract;
 using Autofac.Extras.DynamicProxy;
 using Castle.DynamicProxy;
-using DataAccess.EntityFramework;
 using Core.Utilities.Interceptors;
 using Core.Utilities.Helpers.FileHelper;
+using DataAccess.Concrete.EntityFramework;
 
 namespace Business.DependencyResolver.Autofac
 {
