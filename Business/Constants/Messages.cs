@@ -18,5 +18,6 @@ namespace Business.Constants
         public static string PasswordError="Kod Yanlis";
         public static string SuccessfullLogin="Hesaba Giris yapildi";
         public static string UserAlreadyExist="Kullanici zaten mevcut";
+        public static string UserRegistered="Kullanici giris yapdi";
     }
 }
