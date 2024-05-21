@@ -1,7 +1,20 @@
 
-using Autofac.Extensions.DependencyInjection;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Business.Abstract;
+using Business.Concrete;
 using Business.DependencyResolver.Autofac;
+
+using Core.DependencyResolvers;
+using Core.Extensions;
+
+using Core.Utilities.IOC;
+using Core.Utilities.Security.Encryption;
+using Core.Utilities.Security.JWT;
+using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace WebAPI
 {
@@ -17,21 +30,31 @@ namespace WebAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            //builder.Services.AddSingleton<ICarService, CarManager>();
-            //builder.Services.AddSingleton<ICarDal,EfCarDal>();
-            //builder.Services.AddSingleton<IUserService,UserManager>();
-            //builder.Services.AddSingleton<IUserDal,EfUserDal>();
-            //builder.Services.AddSingleton<ICustomerService,CustomerManager>();
-            //builder.Services.AddSingleton<ICustomerDal,EfCustomerDal>();
-            //builder.Services.AddSingleton<IRentalService,RentalManager>();
-            //builder.Services.AddSingleton<IRentalDal,EfRentalDal>();
-            builder.Host
-       .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-       .ConfigureContainer<ContainerBuilder>(builder =>
-       {
-           builder.RegisterModule(new AutofacBusinessModule());
-       });
+            //builder.Services.AddSingleton<IProductService, ProductManager>();
+            //builder.Services.AddSingleton<IProductDal, EfProductDal>();
 
+            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory(options =>
+    options.RegisterModule(new AutofacBusinessModule())
+));
+            var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidIssuer = tokenOptions.Issuer,
+                        ValidAudience = tokenOptions.Audience,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
+                    };
+                });
+            builder.Services.AddDependencyResolvers(new ICoreModule[] {
+            new CoreModule()
+            });
+            
 
             var app = builder.Build();
 
@@ -41,7 +64,7 @@ namespace WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseAuthentication();
             app.UseHttpsRedirection();
 
             app.UseAuthorization();

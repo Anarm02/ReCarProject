@@ -19,9 +19,13 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-           public IResult Add(User user)
+        public IResult Add(User user)
         {
-           _userDal.Add(user);
+            if (user == null)
+            {
+                throw new Exception("Kllanici yok");
+            }
+            _userDal.Add(user);
             return new SuccessResult();
         }
 

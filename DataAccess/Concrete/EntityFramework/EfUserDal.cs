@@ -17,12 +17,14 @@ namespace DataAccess.Concrete.EntityFramework
             using (var context = new RcdbContext())
             {
                 var result = from oc in context.OperationClaims
-                             join uoc in context.UserOperationClaims
-                             on oc.Id equals uoc.OperationClaimId
-                             where uoc.UserId == user.UserId
-                             select new OperationClaim { Id = oc.Id, Name = oc.Name };
+                              join uoc in context.UserOperationClaims
+                              on oc.Id equals uoc.OperationClaimId
+                              where uoc.UserId == user.UserId
+                              select new OperationClaim { Id = oc.Id, Name = oc.Name };
+
                 return result.ToList();
             }
+            throw new Exception("Kullanici yok");
         }
     }
 }
