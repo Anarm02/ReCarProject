@@ -51,10 +51,6 @@ namespace Core.DataAccess
             }
         }
 
-        public List<TEntity> GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Update( TEntity updatedEntity)
         {
