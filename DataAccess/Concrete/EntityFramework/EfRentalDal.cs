@@ -16,7 +16,7 @@ namespace DataAccess.Concrete.EntityFramework
             using (RcdbContext context = new RcdbContext())
             {
                 var deliveredcar = context.Rentals.FirstOrDefault(car => car.RentalId == id);
-                deliveredcar.RentDate = DateTime.Now;
+                deliveredcar.ReturnDate = DateTime.Now;
                 context.SaveChanges();
 
             }

@@ -17,29 +17,20 @@ namespace Business.Concrete
         {
             _rentalDal = rentalDal;
         }
-        public IResult Add(Rental rental)
-        {
-           var rentedCar=_rentalDal.Get(car=>car.RentalId==rental.RentalId);
-            if(rentedCar==null)
-            {
-                _rentalDal.Add(rental);
-                return new SuccessResult();
-            }
-            else
-            {
-                if (rentedCar.CarId == rental.CarId && rentedCar.RentDate == null)
-                {
-                    return new ErrorResult();
-                }
-                else
-                {
-                    _rentalDal.Add(rental);
-                    return new SuccessResult();
-                }
-            }
-        }
+		public IResult Add(Rental rental)
+		{
+			var rentedCar = _rentalDal.Get(car => car.CarId == rental.CarId && car.ReturnDate == null);
 
-        public IResult CarDelivery(int id)
+			if (rentedCar != null)
+			{
+				return new ErrorResult();
+			}
+
+			_rentalDal.Add(rental);
+			return new SuccessResult();
+		}
+
+		public IResult CarDelivery(int id)
         {
             var deliveredCar=_rentalDal.Get(car=> car.RentalId==id);   
             if(deliveredCar!=null)
