@@ -9,16 +9,16 @@ namespace Business.Constants
 {
     public static class Messages
     {
-        public static string isAdded = "Araba listeye eklendi";
-        public static string nameInvalid = "Isimlendirmede hata var";
-        public static string isDeleted = "Araba listeden silindi";
-        public static string isUpdated = "Arab guncellendi";
-        public static string CarImagesCount="Urune daha fazla resim eklenemez";
-        public static string  userNotExist="Boyle bir kullanici yok";
-        public static string PasswordError="Kod Yanlis";
-        public static string SuccessfullLogin="Hesaba Giris yapildi";
-        public static string UserAlreadyExist="Kullanici zaten mevcut";
-        public static string UserRegistered="Kullanici giris yapdi";
-        internal static string? AuthorizationDenied="Yetkiniz yok";
+        public static string isAdded = "Car added";
+        public static string nameInvalid = "Invalid name";
+        public static string isDeleted = "Car Deleted";
+        public static string isUpdated = "Car updated";
+        public static string CarImagesCount="Can't add more images";
+        public static string  userNotExist="This user does'nt exist";
+        public static string PasswordError="Wrong Password";
+        public static string SuccessfullLogin="Login Successfull";
+        public static string UserAlreadyExist="User already exist";
+        public static string UserRegistered="User registered successfull";
+        internal static string? AuthorizationDenied="You have no authority";
     }
 }

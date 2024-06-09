@@ -23,7 +23,7 @@ namespace Business.Concrete
 
 			if (rentedCar != null)
 			{
-				return new ErrorResult();
+				return new ErrorResult("Already rented");
 			}
 
 			_rentalDal.Add(rental);

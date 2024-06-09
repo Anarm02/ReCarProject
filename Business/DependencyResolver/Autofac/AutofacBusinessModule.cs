@@ -33,6 +33,10 @@ namespace Business.DependencyResolver.Autofac
             builder.RegisterType<FileHelperManager>().As<IFileHelper>().SingleInstance();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
             builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
+            builder.RegisterType<BrandManager>().As<IBrandService>().SingleInstance();
+            builder.RegisterType<EfBrandDal>().As<IBrandDal>().SingleInstance();
+            builder.RegisterType<EfColorDal>().As<IColorDal>().SingleInstance();
+            builder.RegisterType<ColorManager>().As<IColorService>().SingleInstance();
   
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
